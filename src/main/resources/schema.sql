@@ -21,5 +21,5 @@ CREATE TABLE HABITACION (
     nevera BOOLEAN NOT NULL,
     metros_cuadrados DECIMAL(5,2) NOT NULL,
     capacidad_maxima INT NOT NULL,
-    FOREIGN KEY (tipo_habitacion_id) REFERENCES TIPO_HABITACION(id)
+     FOREIGN KEY (tipo_habitacion_id) REFERENCES TIPO_HABITACION(id) ON DELETE RESTRICT
 );

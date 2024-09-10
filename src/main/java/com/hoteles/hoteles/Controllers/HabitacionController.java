@@ -33,7 +33,6 @@ public class HabitacionController {
         return new ResponseEntity<>(habitaciones, HttpStatus.OK);
     }
 
-    // Obtener una habitación por ID
     @GetMapping("/{id}")
     public ResponseEntity<Habitacion> getHabitacionById(@PathVariable UUID id) {
         Optional<Habitacion> habitacion = habitacionRepository.findById(id);

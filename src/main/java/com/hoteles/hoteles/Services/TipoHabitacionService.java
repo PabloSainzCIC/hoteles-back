@@ -9,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hoteles.hoteles.Models.TipoHabitacion;
+import com.hoteles.hoteles.Repositories.HabitacionRepository;
 import com.hoteles.hoteles.Repositories.TipoHabitacionRepository;
 
 @Service
 public class TipoHabitacionService {
 
-    @Autowired
+   @Autowired
     private TipoHabitacionRepository tipoHabitacionRepository;
+
+    @Autowired
+    private HabitacionRepository habitacionRepository;
 
     // Crear un nuevo tipo de habitación
     public TipoHabitacion createTipoHabitacion(TipoHabitacion tipoHabitacion) {
@@ -42,11 +46,15 @@ public class TipoHabitacionService {
     }
 
     // Eliminar un tipo de habitación por ID
-    public boolean deleteTipoHabitacion(UUID id) {
-        if (tipoHabitacionRepository.existsById(id)) {
-            tipoHabitacionRepository.deleteById(id);
-            return true;
+    public void deleteTipoHabitacion(UUID id) {
+        if (!tipoHabitacionRepository.existsById(id)) {
+            throw new IllegalArgumentException("Tipo de habitación no encontrado con ID: " + id);
         }
-        return false;
+        if (habitacionRepository.existsByTipoHabitacionId(id)) {
+            throw new IllegalStateException("No se puede eliminar el tipo de habitación porque tiene habitaciones asociadas");
+        }
+        tipoHabitacionRepository.deleteById(id);
     }
+
+    
 }

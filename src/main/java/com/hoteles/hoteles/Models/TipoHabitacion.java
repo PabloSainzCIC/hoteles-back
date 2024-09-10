@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,9 +33,10 @@ public class TipoHabitacion {
     
     @Column(name = "minimo_precio", nullable = false)
     private double minimoPrecio;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "tipoHabitacion", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Habitacion> habitaciones = new ArrayList<>();
+    private List<Habitacion> habitaciones = new ArrayList<>();
 
 
 
@@ -76,7 +80,7 @@ public class TipoHabitacion {
         this.minimoPrecio = minimoPrecio;
     }
 
-    public ArrayList<Habitacion> getHabitaciones() {
+    public List<Habitacion> getHabitaciones() {
         return habitaciones;
     }
 

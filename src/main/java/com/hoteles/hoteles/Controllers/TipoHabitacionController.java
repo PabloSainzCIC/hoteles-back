@@ -59,6 +59,11 @@ public class TipoHabitacionController {
     // Eliminar un tipo de habitación por ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTipoHabitacion(@PathVariable UUID id) {
-        return tipoHabitacionService.deleteTipoHabitacion(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        try {
+            tipoHabitacionService.deleteTipoHabitacion(id);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null); // 409 Conflict
+        }
     }
 }

@@ -7,5 +7,5 @@ import java.util.UUID;
 
 @Repository
 public interface HabitacionRepository extends JpaRepository<Habitacion, UUID> {
-	
+	boolean existsByTipoHabitacionId(UUID tipoHabitacionId);
 }
