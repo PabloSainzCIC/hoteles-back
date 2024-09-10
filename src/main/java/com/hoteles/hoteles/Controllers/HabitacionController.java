@@ -19,14 +19,14 @@ public class HabitacionController {
     @Autowired
     private HabitacionRepository habitacionRepository;
 
-    // Crear una nueva habitación
+
     @PostMapping
     public ResponseEntity<Habitacion> createHabitacion(@RequestBody Habitacion habitacion) {
         Habitacion savedHabitacion = habitacionRepository.save(habitacion);
         return new ResponseEntity<>(savedHabitacion, HttpStatus.CREATED);
     }
 
-    // Obtener todas las habitaciones
+    
     @GetMapping
     public ResponseEntity<List<Habitacion>> getAllHabitaciones() {
         List<Habitacion> habitaciones = habitacionRepository.findAll();
@@ -39,7 +39,7 @@ public class HabitacionController {
         return habitacion.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Actualizar una habitación existente
+    
     @PutMapping("/{id}")
     public ResponseEntity<Habitacion> updateHabitacion(@PathVariable UUID id, @RequestBody Habitacion habitacion) {
         if (!habitacionRepository.existsById(id)) {
@@ -49,7 +49,7 @@ public class HabitacionController {
         return new ResponseEntity<>(updatedHabitacion, HttpStatus.OK);
     }
 
-    // Eliminar una habitación por ID
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteHabitacion(@PathVariable UUID id) {
         if (!habitacionRepository.existsById(id)) {

@@ -28,21 +28,21 @@ public class TipoHabitacionController {
     @Autowired
     private TipoHabitacionService tipoHabitacionService;
 
-    // Crear un nuevo tipo de habitación
+    
     @PostMapping
     public ResponseEntity<TipoHabitacion> createTipoHabitacion(@RequestBody TipoHabitacion tipoHabitacion) {
         TipoHabitacion savedTipoHabitacion = tipoHabitacionService.createTipoHabitacion(tipoHabitacion);
         return new ResponseEntity<>(savedTipoHabitacion, HttpStatus.CREATED);
     }
 
-    // Obtener todos los tipos de habitación
+    
     @GetMapping
     public ResponseEntity<List<TipoHabitacion>> getAllTipoHabitaciones() {
         List<TipoHabitacion> tipoHabitaciones = tipoHabitacionService.getAllTipoHabitaciones();
         return new ResponseEntity<>(tipoHabitaciones, HttpStatus.OK);
     }
 
-    // Obtener un tipo de habitación por ID
+    
     @GetMapping("/{id}")
     public ResponseEntity<TipoHabitacion> getTipoHabitacionById(@PathVariable UUID id) {
         Optional<TipoHabitacion> tipoHabitacion = tipoHabitacionService.getTipoHabitacionById(id);
