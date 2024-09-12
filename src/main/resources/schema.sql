@@ -1,6 +1,6 @@
 CREATE TABLE TIPO_HABITACION (
     id UUID PRIMARY KEY,
-    nombre_tipo VARCHAR(255) NOT NULL,
+    nombre_tipo VARCHAR(255) NOT NULL CHECK (LENGTH(nombre_tipo) > 0),
     descripcion VARCHAR(255),
     minimo_metros_cuadrados DECIMAL(5,2) NOT NULL,
     minimo_precio DOUBLE NOT NULL
